@@ -1,4 +1,6 @@
 
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+
 # [Choice] Node.js version: 14, 12, 10
 ARG VARIANT=14
 FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:${VARIANT}
