@@ -1,27 +1,21 @@
-#-------------------------------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See https://go.microsoft.com/fwlink/?linkid=2090316 for license information.
-#-------------------------------------------------------------------------------------------------------------
+# https://github.com/microsoft/vscode-dev-containers/blob/master/containers/javascript-node-postgres/.devcontainer/Dockerfile
 
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:14
+# Update the VARIANT arg in docker-compose.yml to pick a Node version: 10, 12, 14
+ARG VARIANT=12
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
 
-# The javascript-node image includes a non-root node user with sudo access. Use
-# the "remoteUser" property in devcontainer.json to use it. On Linux, the container
-# user's GID/UIDs will be updated to match your local UID/GID when using the image
-# or dockerFile property. Update USER_UID/USER_GID below if you are using the
-# dockerComposeFile property or want the image itself to start with different ID
-# values. See https://aka.ms/vscode-remote/containers/non-root-user for details.
-ARG USERNAME=node
+# Update args in docker-compose.yaml to set the UID/GID of the "node" user.
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID node && usermod --uid $USER_UID --gid $USER_GID node; fi
 
-# Alter node user as needed, install tslint, typescript. eslint is installed by javascript image
-RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then \
-        groupmod --gid $USER_GID $USERNAME \
-        && usermod --uid $USER_UID --gid $USER_GID $USERNAME \
-        && chmod -R $USER_UID:$USER_GID /home/$USERNAME \
-        && chmod -R $USER_UID:root /usr/local/share/nvm /usr/local/share/npm-global; \
-    fi \
-    #
-    # Install tslint, typescript. eslint is installed by javascript image
-    && sudo -u ${USERNAME} npm install -g @zowe/cli@next
+# [Optional] Uncomment this section to install additional OS packages.
+# RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+#     && apt-get -y install --no-install-recommends <your-package-list-here>
+
+# [Optional] Uncomment if you want to install an additional version of node using nvm
+# ARG EXTRA_NODE_VERSION=10
+# RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
+
+# [Optional] Uncomment if you want to install more global node modules
+RUN su node -c "npm install -g @zowe/cli@next"

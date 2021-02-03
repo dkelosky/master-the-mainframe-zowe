@@ -16,5 +16,5 @@
         "kelosky.ibm-jcl",
         "Zowe.vscode-extension-for-zowe"
     ],
-    // "remoteUser": "node"
+    "remoteUser": "node"
 }
