@@ -1,9 +1,12 @@
 # https://github.com/microsoft/vscode-dev-containers/blob/master/containers/javascript-node-postgres/.devcontainer/Dockerfile
 
 # Update the VARIANT arg in docker-compose.yml to pick a Node version: 10, 12, 14
-ARG VARIANT=3.12
-FROM mcr.microsoft.com/vscode/devcontainers/base:alpine-${VARIANT}
+# ARG VARIANT=3.12
+# FROM mcr.microsoft.com/vscode/devcontainers/base:alpine-${VARIANT}
 # # Update args in docker-compose.yaml to set the UID/GID of the "node" user.
+
+ARG VARIANT=12
+FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -29,4 +32,4 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --g
 # RUN ls -la /usr/local/lib/node_modules
 # RUN id -un
 # RUN sudo chown -R $USER /usr/local/lib/node_modules
-# RUN su node -c "npm install -g @zowe/cli@next"
+RUN su node -c "npm install -g @zowe/cli@next"
