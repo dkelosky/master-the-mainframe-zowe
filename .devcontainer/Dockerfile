@@ -23,7 +23,10 @@ ARG USER_GID=$USER_UID
 RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID node && usermod --uid $USER_UID --gid $USER_GID node; fi
 # RUN npm install -g @zowe/cli@next
 
-RUN ls -la /usr/local/lib/node_modules
-RUN id -un
-RUN sudo chown -R $USER /usr/local/lib/node_modules
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+export PATH=~/.npm-global/bin:$PATH
+# RUN ls -la /usr/local/lib/node_modules
+# RUN id -un
+# RUN sudo chown -R $USER /usr/local/lib/node_modules
 RUN su node -c "npm install -g @zowe/cli@next"
