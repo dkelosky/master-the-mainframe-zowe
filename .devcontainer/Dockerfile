@@ -1,13 +1,10 @@
 # https://github.com/microsoft/vscode-dev-containers/blob/master/containers/javascript-node-postgres/.devcontainer/Dockerfile
 
 # Update the VARIANT arg in docker-compose.yml to pick a Node version: 10, 12, 14
-ARG VARIANT=12
-FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
+# ARG VARIANT=12
+# FROM mcr.microsoft.com/vscode/devcontainers/javascript-node:dev-${VARIANT}
 
-# Update args in docker-compose.yaml to set the UID/GID of the "node" user.
-ARG USER_UID=1000
-ARG USER_GID=$USER_UID
-RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID node && usermod --uid $USER_UID --gid $USER_GID node; fi
+# # Update args in docker-compose.yaml to set the UID/GID of the "node" user.
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
@@ -18,4 +15,12 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --g
 # RUN su node -c "source /usr/local/share/nvm/nvm.sh && nvm install ${EXTRA_NODE_VERSION}"
 
 # [Optional] Uncomment if you want to install more global node modules
+
+FROM node:lts-alpine 
+
+ARG USER_UID=1000
+ARG USER_GID=$USER_UID
+RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID node && usermod --uid $USER_UID --gid $USER_GID node; fi
+# RUN npm install -g @zowe/cli@next
+
 RUN su node -c "npm install -g @zowe/cli@next"
