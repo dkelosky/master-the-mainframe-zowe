@@ -25,8 +25,8 @@ FROM node:lts-alpine
 
 RUN mkdir ~/.npm-global
 
-# RUN npm config set prefix '~/.npm-global'
-# RUN export PATH=.npm-global/bin:$PATH
+RUN npm config set prefix '~/.npm-global'
+RUN export PATH=~/.npm-global/bin:$PATH
 # RUN ls -la /usr/local/lib/node_modules
 # RUN id -un
 # RUN sudo chown -R $USER /usr/local/lib/node_modules
