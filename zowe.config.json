@@ -1,0 +1,20 @@
+{
+    "$schema": "./zowe.schema.json",
+    "profiles": {
+        "mtm": {
+            "type": "zosmf",
+            "properties": {
+                "port": 10443,
+                "rejectUnauthorized": false
+            }
+        }
+    },
+    "defaults": {
+        "zosmf": "mtm"
+    },
+    "plugins": [],
+    "secure": [
+        "profiles.mtm.properties.user",
+        "profiles.mtm.properties.password"
+    ]
+}
