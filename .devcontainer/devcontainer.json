@@ -1,12 +1,12 @@
 {
     "name": "Node.js",
-    "build": {
-        "dockerfile": "Dockerfile",
-        // Update 'VARIANT' to pick a Node version: 10, 12, 14
-        "args": {
-            "VARIANT": "14"
-        }
-    },
+    // "build": {
+    //     "dockerfile": "Dockerfile",
+    //     // Update 'VARIANT' to pick a Node version: 10, 12, 14
+    //     "args": {
+    //         "VARIANT": "14"
+    //     }
+    // },
     // Set *default* container specific settings.json values on container create.
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
@@ -16,5 +16,6 @@
         "kelosky.ibm-jcl",
         "Zowe.vscode-extension-for-zowe"
     ],
-    "remoteUser": "node"
+    "postCreateCommand": "npm install -g @zowe/cli@next"
+    // "remoteUser": "node"
 }
