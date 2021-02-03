@@ -29,4 +29,4 @@ RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --g
 # RUN ls -la /usr/local/lib/node_modules
 # RUN id -un
 # RUN sudo chown -R $USER /usr/local/lib/node_modules
-RUN su node -c "npm install -g @zowe/cli@next"
+# RUN su node -c "npm install -g @zowe/cli@next"
