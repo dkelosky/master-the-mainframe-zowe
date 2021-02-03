@@ -23,10 +23,10 @@ FROM node:lts-alpine
 # RUN if [ "$USER_GID" != "1000" ] || [ "$USER_UID" != "1000" ]; then groupmod --gid $USER_GID node && usermod --uid $USER_UID --gid $USER_GID node; fi
 # RUN npm install -g @zowe/cli@next
 
-# RUN mkdir ~/.npm-global
+RUN mkdir ~/.npm-global
 # RUN npm config set prefix '~/.npm-global'
 # RUN export PATH=~/.npm-global/bin:$PATH
 # RUN ls -la /usr/local/lib/node_modules
 # RUN id -un
 # RUN sudo chown -R $USER /usr/local/lib/node_modules
-# RUN su node -c "npm install -g @zowe/cli@next"
+RUN su node -c "npm install -g @zowe/cli@next"
