@@ -2,6 +2,10 @@
 
 ##
 
+`zowe config secure` 
+
+**OR**
+
 Create a `zowe.config.user.json` with the host IP, user, and password using this template:
 
 ```jsonc
