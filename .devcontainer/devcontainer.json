@@ -12,6 +12,7 @@
     "settings": {
         "terminal.integrated.shell.linux": "/bin/bash"
     },
+    ""
     "extensions": [
         "kelosky.ibm-assembler",
         "kelosky.ibm-jcl",

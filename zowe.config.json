@@ -5,7 +5,8 @@
             "type": "zosmf",
             "properties": {
                 "port": 10443,
-                "rejectUnauthorized": false ///
+                "host": "192.86.32.153",
+                "rejectUnauthorized": false
             }
         }
     },
